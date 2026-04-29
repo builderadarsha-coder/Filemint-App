@@ -1,0 +1,19 @@
+{
+  "name": "FileMint: PDF \u0026 Image Tools",
+  "description": "All-in-one PDF \u0026 image tools. Fast, private \u0026 easy to use. Merge multiple PDF files, compress PDF without losing quality, remove image background online, and convert PDF to DOC free. Highly optimized tools to scan document, run OCR scanner, shrink JPG/PNG, and reduce file sizes locally and privately.",
+  "requestFramePermissions": [
+    "camera"
+  ],
+  "majorCapabilities": [
+    "pdf tools",
+    "merge pdf",
+    "compress pdf",
+    "image compressor",
+    "background remover",
+    "pdf converter",
+    "file tools",
+    "resize image",
+    "scan document to pdf",
+    "ocr scanner"
+  ]
+}
