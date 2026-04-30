@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import { Search, User, Filter, ArrowRight } from 'lucide-react';
+import { Search, User, Filter, ArrowRight, Sun, Moon } from 'lucide-react';
 import { TOOLS } from '../../constants';
 import { ToolCard } from '../ui/ToolCard';
 import { Icon } from '../ui/Icon';
 import { ToolItem } from '../../types';
 import { Footer } from '../ui/Footer';
+import { useSettings } from '../../hooks/useSettings';
 
 const PASTEL_COLORS = [
   '#FFF4D6', // Yellow
@@ -51,6 +52,7 @@ const ToolSection: React.FC<{ title: string, tools: ToolItem[], onToolClick: (to
 
 export const HomeView: React.FC<{ onToolClick: (tool: ToolItem) => void }> = ({ onToolClick }) => {
   const [searchQuery, setSearchQuery] = useState('');
+  const { isDarkMode, toggleDarkMode } = useSettings();
 
   const filteredTools = TOOLS.filter(t => 
     t.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
@@ -97,8 +99,18 @@ export const HomeView: React.FC<{ onToolClick: (tool: ToolItem) => void }> = ({ 
             <p className="text-[#6B7280] dark:text-gray-500 font-medium text-[13px] mt-1">Efficient local file processing</p>
           </div>
           <div className="flex items-center gap-2">
-            <button className="w-10 h-10 rounded-full flex items-center justify-center bg-white dark:bg-slate-800 shadow-sm border border-[#E5E7EB] dark:border-slate-700 text-brand-pink active:scale-90 transition-transform">
-              <Search size={18} />
+            <button 
+              onClick={toggleDarkMode}
+              className={`w-10 h-10 rounded-full flex items-center justify-center bg-white dark:bg-slate-800 shadow-sm border border-[#E5E7EB] dark:border-slate-700 active:scale-95 transition-all duration-300 relative group ${
+                isDarkMode 
+                  ? 'text-yellow-400 shadow-[0_0_15px_-3px_rgba(250,204,21,0.4)]' 
+                  : 'text-brand-pink shadow-[0_0_15px_-3px_rgba(255,107,157,0.4)]'
+              }`}
+            >
+              <div className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-current blur-md scale-75" />
+              <div className="relative z-10">
+                {isDarkMode ? <Sun size={18} /> : <Moon size={18} />}
+              </div>
             </button>
             <button className="w-10 h-10 rounded-full flex items-center justify-center bg-white dark:bg-slate-800 shadow-sm border border-[#E5E7EB] dark:border-slate-700 overflow-hidden active:scale-90 transition-transform">
               <img src="https://api.dicebear.com/7.x/notionists/svg?seed=Guest&backgroundColor=transparent" alt="User" />
